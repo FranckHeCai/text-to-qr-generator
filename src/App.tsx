@@ -23,34 +23,43 @@ function App() {
   };
 
   return (
-    <div className='w-full h-screen flex flex-col'>
-      <div className="mx-auto flex gap-5 items-center">
-        <h1 className='text-4xl text-sky-700  font-bold'>QR Snap</h1>
+    <div className='w-full flex flex-col items-center p-5 gap-0 sm:gap-2'>
+      <div className="mx-auto flex sm:gap-5 items-center justify-center flex-wrap">
         <picture>
-          <img className="max-w-50 h-auto" src="/qr-snap-logo.png" alt="Qr Snap logo" />
+          <img className="max-w-30 h-auto" src="/qr-snap-logo.png" alt="Qr Snap logo" />
         </picture>
+        <h1 className='text-4xl text-sky-700  font-bold'>QR Snap</h1>
       </div>
-      <div className="max-w-sm">
-        <p>Generate. Scan. Share</p>
-        <form className="flex flex-col" onSubmit={(e) =>{handleSubmit(e)}}>
+      <div className="w-full sm:w-md flex flex-col items-center sm:gap-4">
+        <p className="text-md font-medium italic">Generate. Scan. Share.</p>
+        <form className="flex flex-col w-full" onSubmit={(e) =>{handleSubmit(e)}}>
           <input
           required
             type="text"
             placeholder="Enter text to generate QR"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="p-2 mb-4 rounded text-slate-800"
+            className="p-2 mb-4 rounded text-sky-950 border-2 border-sky-600"
           />
-          <button className="bg-slate-800 px-4 py-1 text-slate-100 rounded cursor-pointer">Download QR Code</button>
-        </form>
-        {text && 
-          <div className="bg-white p-4 rounded w-sm"> 
-            <QRCodeCanvas ref={qrRef} value={text} size={1024}
-            bgColor="#ffffff" // Background color for padding
-              fgColor="#000000" // Foreground color for the QR code
-            />
-          </div>
+         
+        {text && (
+          <>
+            <div className="mx-auto"> 
+              <QRCodeCanvas ref={qrRef} value={text} size={256}
+              bgColor="#ffffff" // Background color for padding
+                fgColor="#000000" // Foreground color for the QR code
+              />
+            </div>
+            <button className="mt-4 bg-sky-700 px-4 py-1 w-full text-slate-100 rounded cursor-pointer">
+              Download QR Code
+            </button>
+          </>
+          
+        )
+          
         }
+         
+        </form>
       </div>
       
       
